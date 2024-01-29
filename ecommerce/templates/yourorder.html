@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<center>
+<h4 class="mt-3 text-danger" ><b>YOUR ORDERS</b></h4>
+</center>
+<h4 class="text-primary mt-3"><center>Name Of Customer: {{user}}</center></h4>
+{% for i in o %}
+<div class="container-fluid">
+    <div class="row" style="margin-bottom:50px;">
+        <div class="col-sm-5 ms-5 mt-5">
+           <img src="{{i.product.img.url}}" height="400px" width="400px">
+</div>
+        <div class="col-sm-6 mt-5">
+            <h5><b>Order address: {{i.address}}</b></h5>
+            <h5><b>Customer phone: {{i.phone}}</b></h5>
+            <h5><b>Product name: {{i.product.name}}</b></h5>
+            <h5><b>Product price: {{i.product.price}}</b></h5>
+            <h5><b>Ordered on: {{i.order_status}}</b></h5>
+            <h5><b>Delivery status: {{i.delivery_status}}</b></h5>
+        </div>
+    </div>
+    </div>
+{% endfor %}
+{% endblock %}
