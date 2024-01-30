@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% if not c %}
+<div>
+    <h3 class="text-center">Cart is empty</h3>
+    <h5 class="text-center text-dark"><a href="{% url 'shop:allcat' %}">Continue Shopping</a></h5>
+</div>
+{% else %}
+<div class="container-fluid mt-4">
+
+<div class="row">
+    <h1 class="text-center">SHOPPING CART</h1>
+
+<div class="col-sm-6 mt-3">
+    <table class="table table-bordered border border-2 border-dark text-center">
+        <tr><th colspan="5">CART ITEMS</th></tr>
+        {% for i in c %}
+        <tr>
+            <td><img src="{{i.product.img.url}}"  height="200px" width="200px"></td>
+            <td><b>{{i.product.name}}</b></td>
+            <td><b>product id:{{i.product.id}}</b><br>
+                <b>Unit price:{{i.product.price}}</b><br>
+                <b>Quantity:{{i.quantity}}*{{i.product.price}}</b>
+            </td>
+            <td><b>Subtotal:{{i.subtotal}}</b></td>
+            <td>
+                {% if i.quantity < i.product.stock %}
+                <b><a href="{% url 'cart:addtocart' i.product.name %}"><i style="color:red;font-size:20px;" class="fa-solid fa-circle-plus"></i></a><br><br><br>
+            <a href="{% url 'cart:decrementcart' i.product.name %}"><i style="color:red;font-size:20px;" class="fa-solid fa-circle-minus"></i></a><br><br><br>
+            <a href="{% url 'cart:removecart' i.product.name %}"><i style="color:blue;font-size:20px;" class="fa-solid fa-trash-can"></i></a></b></td>
+ {% else %}
+           <b><a href="{% url 'cart:decrementcart' i.product.name %}"><i style="color:red;font-size:20px;" class="fa-solid fa-circle-minus"></i></a><br><br><br>
+            <a href="{% url 'cart:removecart' i.product.name %}"><i style="color:blue;font-size:20px;" class="fa-solid fa-trash-can"></i></a></b></td>
+
+        </tr>
+        {% endif %}
+     {% endfor %}
+    </table>
+</div>
+
+<div class="col-sm-4 mt-3" style="position:relative">
+     <table class="table table-bordered border border-2 border-dark text-center">
+         <tr><th colspan="4">CHECK OUT</th></tr>
+         <tr><td class="text-center"><b>Total: {{total}}</b></td></tr>
+    </table>
+    <a href="{% url 'cart:orderform' %}" class="btn btn-danger text-dark"><b>Place Order</b></a>
+    <a href="{% url 'shop:allcat' %}" class="btn btn-danger text-dark" style="position:absolute;right:0;"><b>Continue Shopping</b></a>
+</div>
+</div>
+    </div>
+
+{% endif %}
+{% endblock %}
