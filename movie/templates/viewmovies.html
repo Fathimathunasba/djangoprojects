@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+<html lang="en">
+
+{% block content %}
+    <div class="row">
+     {% for i in movie %}
+        <div class="card mb-3 ms-3" style=" height:300px;width: 300px;">
+            <img src="{{i.img.url}}" class="card-img-top" height="300px" width="200px" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{i.name}}</h5>
+                <p class="card-text">{{i.desc}}</p>
+                <a href="{% url 'apps:viewmoviebyid' i.id %}" class="btn btn-danger">view</a>
+            </div>
+        </div>
+     {% endfor %}
+    </div>
+
+
+
+{% endblock %}
+</body>
+</html>

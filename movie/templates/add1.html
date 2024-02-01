@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h3>ADD MOVIE  DETAILS-USER DEFINED</h3>
+     <form method="POST" enctype="multipart/form-data">
+       {% csrf_token %}
+
+     {{form.as_p}}
+       <input type="submit">
+     </form>
+
+{% endblock %}
